@@ -16,7 +16,7 @@
  * Plugin URI:        https://github.com/grappler/polylang-slug
  * GitHub Plugin URI: https://github.com/grappler/polylang-slug
  * Description:       Allows same slug for multiple languages in Polylang
- * Version:           0.2.1
+ * Version:           0.2.2
  * Author:            Ulrich Pogson
  * Author URI:        http://ulrich.pogson.ch/
  * License:           GPL-2.0+
@@ -39,7 +39,7 @@ if ( ! defined( 'POLYLANG_VERSION' ) || version_compare( POLYLANG_VERSION, '1.7'
  * @since 0.2.0
  */
 function polylang_slug_admin_notices() {
-	echo '<div class="error"><p>' . __( 'Polylang Slug requires Polylang v1.7 and WordPress 4.0', 'polylang-slug') . '</p></div>';
+	echo '<div class="error"><p>' . __( 'Polylang Slug requires at the minimum Polylang v1.7 and WordPress 4.0', 'polylang-slug') . '</p></div>';
 }
 
 /**
@@ -258,10 +258,10 @@ function polylang_slug_should_run( $query = '' ) {
 	 * @param bool     false  Not disabling run.
 	 * @param WP_Query $query The WP_Query instance (passed by reference).
 	 */
-	
+
 	// Do not run in admin or if Polylang is disabled
-	$disable = apply_filters( 'polylang_slug_disable', false, $query ); 
-	if ( is_admin() || ! function_exists( 'pll_current_language' ) || $disable ) {
+	$disable = apply_filters( 'polylang_slug_disable', false, $query );
+	if ( is_admin() || is_feed() || ! function_exists( 'pll_current_language' ) || $disable ) {
 		return false;
 	}
 	// The lang query should be defined if the URL contains the language
